@@ -30,6 +30,7 @@ double promediar(std::vector<int> puntajes);
  */
 int main(int argc, char** argv) {
     std::vector<Estudiante> E; //Se crea un vector de tipo Estudiante
+    Estudiante A;
     if (argc > 1) {
         std::string archivo(argv[1]);
         
@@ -37,16 +38,18 @@ int main(int argc, char** argv) {
         std::ofstream escritura("promedio.csv");
         
         if (lectura) {
-            int i=0;
             for (std::string linea; getline(lectura,linea) ; ) {
                 std::vector<int> puntajes = obtenerPuntajes(linea);
                 //Se llenan los datos en el vector E
-                E[i].SetRut(puntajes.at(0)); 
-                E[i].SetPromedio(promediar(puntajes));
+                A.SetRut(puntajes.at(0)); 
+                A.SetPromedio(promediar(puntajes));
+                E.push_back(A);
 
-                std::string salida = std::to_string(E[i].GetRut()) + ";" + std::to_string(E[i].GetPromedio());
+                int r = puntajes.at(0);
+                double p = promediar(puntajes);
+
+                std::string salida = std::to_string(r) + ";" + std::to_string(p);
                 escritura << salida << std::endl;
-                i++;
                 puntajes.clear();
             }
         }
