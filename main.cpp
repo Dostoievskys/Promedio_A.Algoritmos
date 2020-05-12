@@ -28,17 +28,17 @@ double promediar(std::vector<int> puntajes);
  * @param argv argumentos
  * @return El código de salida del programa
  */
-void Ordenamiento(std::vector<Estudiante> X);
+void Ordenamiento(std::vector<Estudiante> &x,int n);
 
 int main(int argc, char** argv) {
     std::vector<Estudiante> E; //Se crea un vector de tipo Estudiante
-    Estudiante A;
+    Estudiante A,B;
+    int cont=0;
     if (argc > 1) {
         std::string archivo(argv[1]);
-        
         std::ifstream lectura(archivo);
         std::ofstream escritura("promedio.csv");
-        
+    
         if (lectura) {
             for (std::string linea; getline(lectura,linea) ; ) {
                 std::vector<int> puntajes = obtenerPuntajes(linea);
@@ -46,10 +46,15 @@ int main(int argc, char** argv) {
                 A.SetRut(puntajes.at(0)); 
                 A.SetPromedio(promediar(puntajes));
                 E.push_back(A);
-
-                std::string salida = std::to_string(A.GetRut()) + ";" + std::to_string(A.GetPromedio());
-                escritura << salida << std::endl;
+                cont++;
                 puntajes.clear();
+            }
+            Ordenamiento(E,cont);
+            for(int i=0; i<cont;i++){ //Creamos el archivo ordenado
+                B=E[i];
+
+                std::string salida = std::to_string(B.GetRut()) + ";" + std::to_string(B.GetPromedio());
+                escritura << salida << std::endl;
             }
         }
     }
@@ -98,18 +103,17 @@ double promediar(std::vector<int> puntajes) {
     return promedio;
 }
 
-void Ordenamiento(std::vector<Estudiante> x){ //Ordenamiento por Seleccion
-    int i,j,k;
+void Ordenamiento(std::vector<Estudiante> &x, int n){ //Ordenamiento por Seleccion
+    int k;
     Estudiante aux;
-    for(i=0;i<x.size();i++){
-        k=1;
-        for(j=i+1 ; j<=x.size();j++){
+    //swap(x[0],x[1]);
+    for(int i=0;i<n;i++){
+        k=i;
+        for(int j=i+1 ; j<n;j++){
             if(x[j].GetPromedio() < x[k].GetPromedio()){
                 k=j;
             }
         }
-        aux=x[k];
-        x.insert(x.begin()+k,x[j]);
-        x.insert(x.begin()+j,aux);
+        swap(x[i],x[k]);
     }
 }
