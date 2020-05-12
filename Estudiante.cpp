@@ -1,13 +1,7 @@
-class Estudiante{
-    private:
-        int rut;
-        double promedio;
-    public:
-        double GetPromedio;
-        int GetRut;
-        void SetPromedio(double y);
-        void SetRut(int x);
-}
+#include <Estudiante.h>
+#include <iostream>
+
+using namespace std;
 
 double Estudiante::GetPromedio(){
     return promedio;
