@@ -64,7 +64,9 @@ int main(int argc, char** argv) {
 
 void participantes() {
     std::cout << std::endl << "=== Ejemplo de Promediar ===" << std::endl;
-    std::cout << std::endl << "Braulio"  << std::endl; // Reemplazar por su nombre
+    std::cout << std::endl << "Braulio Argandoña"  << std::endl;
+    std::cout << std::endl << "Fanny Rivero"  << std::endl;
+    std::cout << std::endl << "Jennifer Portiño"  << std::endl;
 }
 
 vector<int> obtenerPuntajes(std::string fila) {
