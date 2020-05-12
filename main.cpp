@@ -28,6 +28,8 @@ double promediar(std::vector<int> puntajes);
  * @param argv argumentos
  * @return El código de salida del programa
  */
+void Ordenamiento(std::vector<Estudiante> X);
+
 int main(int argc, char** argv) {
     std::vector<Estudiante> E; //Se crea un vector de tipo Estudiante
     Estudiante A;
@@ -45,10 +47,7 @@ int main(int argc, char** argv) {
                 A.SetPromedio(promediar(puntajes));
                 E.push_back(A);
 
-                int r = puntajes.at(0);
-                double p = promediar(puntajes);
-
-                std::string salida = std::to_string(r) + ";" + std::to_string(p);
+                std::string salida = std::to_string(A.GetRut()) + ";" + std::to_string(A.GetPromedio());
                 escritura << salida << std::endl;
                 puntajes.clear();
             }
@@ -97,4 +96,20 @@ double promediar(std::vector<int> puntajes) {
         promedio = (nem + ranking + matematica + lenguaje + ciencias + historia) / 6.0;
     }
     return promedio;
+}
+
+void Ordenamiento(std::vector<Estudiante> x){ //Ordenamiento por Seleccion
+    int i,j,k;
+    Estudiante aux;
+    for(i=0;i<x.size();i++){
+        k=1;
+        for(j=i+1 ; j<=x.size();j++){
+            if(x[j].GetPromedio() < x[k].GetPromedio()){
+                k=j;
+            }
+        }
+        aux=x[k];
+        x.insert(x.begin()+k,x[j]);
+        x.insert(x.begin()+j,aux);
+    }
 }
