@@ -47,15 +47,17 @@ int main(int argc, char** argv) {
                 A.SetPromedio(promediar(puntajes));
                 E.push_back(A);
                 cont++;
+                std::string salida = std::to_string(A.GetRut()) + ";" + std::to_string(A.GetPromedio());
+                escritura << salida << std::endl;
                 puntajes.clear();
             }
-            Ordenamiento(E,cont);
+            /**Ordenamiento(E,cont);
             for(int i=0; i<cont;i++){ //Creamos el archivo ordenado
                 B=E[i];
 
                 std::string salida = std::to_string(B.GetRut()) + ";" + std::to_string(B.GetPromedio());
                 escritura << salida << std::endl;
-            }
+            }**/
         }
     }
     
