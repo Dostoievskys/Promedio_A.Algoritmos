@@ -1,7 +1,10 @@
-#include <Estudiante.h>
+#include "Estudiante.h"
 #include <iostream>
 
 using namespace std;
+
+Estudiante::Estudiante(){
+}
 
 double Estudiante::GetPromedio(){
     return promedio;

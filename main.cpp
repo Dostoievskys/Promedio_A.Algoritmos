@@ -4,30 +4,24 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-#include <Estudiante.h>
+#include "Estudiante.h"
+#include "Estudiante.cpp"
 
 using namespace std;
 
-/**
- * Función que muestra los participantes del grupo
- */
-void participantes();
-
-
+void participantes(); //Función que muestra los participantes del grupo
 /**
  * 
  * @param fila una línea del archivo
  * @return vector con los puntajes. (0 -> rut)
  */
 vector<int> obtenerPuntajes(std::string fila);
-
 /**
  * 
  * @param puntajes Arreglo con los valores
  * @return el promedio del elemento 1 - 7 (Recordar que 0 -> rut)
  */
 double promediar(std::vector<int> puntajes);
-
 /**
  * Ejemplo Factorial
  * @param argc cantidad de argumentos
@@ -35,7 +29,7 @@ double promediar(std::vector<int> puntajes);
  * @return El código de salida del programa
  */
 int main(int argc, char** argv) {
-
+    std::vector<Estudiante> E; //Se crea un vector de tipo Estudiante
     if (argc > 1) {
         std::string archivo(argv[1]);
         
@@ -43,13 +37,16 @@ int main(int argc, char** argv) {
         std::ofstream escritura("promedio.csv");
         
         if (lectura) {
+            int i=0;
             for (std::string linea; getline(lectura,linea) ; ) {
                 std::vector<int> puntajes = obtenerPuntajes(linea);
-                int rut = puntajes.at(0);
-                double promedio = promediar(puntajes);
-                
-                std::string salida = std::to_string(rut) + ";" + std::to_string(promedio);
+                //Se llenan los datos en el vector E
+                E[i].SetRut(puntajes.at(0)); 
+                E[i].SetPromedio(promediar(puntajes));
+
+                std::string salida = std::to_string(E[i].GetRut()) + ";" + std::to_string(E[i].GetPromedio());
                 escritura << salida << std::endl;
+                i++;
                 puntajes.clear();
             }
         }
